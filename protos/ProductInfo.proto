@@ -1,0 +1,30 @@
+/* Определение сервиса начинается с указания версии Protocol Buffers
+(proto3), которую мы используем. */
+syntax = "proto3";
+
+/* Имена пакетов предотвращают конфликты имен между типами сообщений 
+и также применяются для указание места куда следует сложить сгенерированный код. */
+option go_package = "/service";
+
+// Определение интерфейса gRPC-сервиса.
+service ProductInfo {
+    // Mетод для добавления товара, который возвращает ID этого товара в качестве ответа.
+    rpc addProduct(Product) returns (ProductID);
+    // Метод для получения товара по его ID.
+    rpc getProduct(ProductID) returns (Product);
+
+}
+
+/* Определение сообщения Product 
+(используется при создании нового продукта) */
+message Product {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+}
+
+/* Определение сообщения ProductID 
+(используется при извлечениии продукта) */
+message ProductID {
+    string value = 1;
+}
